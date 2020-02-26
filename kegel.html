@@ -1,0 +1,182 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>KGL</title>
+    <script>
+        function playAudio(audioID) {
+            document.getElementById(audioID).play()
+        }
+
+        function startSound() {
+            playAudio("startSound");
+        }
+
+        function stopSound() {
+            playAudio("stopSound");
+        }
+
+        function endSound() {
+            playAudio("endSound");
+        }
+
+        function printTime(e = null, msTime){
+            e.innerHtml = `${msTime}s`;
+        }
+
+        async function rest(timer, msTime, times){
+            if(times < 0){
+                timer.innerHTML = "DONE!";
+                document.querySelector("#start").disabled = false;
+                return;
+            }
+            setTimeout(() => timer.classList.add("rest"), 1000);
+            let copyTime = msTime;
+            timerInterval = await setInterval(() => {
+                timer.innerHTML = `${copyTime*0.001}s`;
+                copyTime -= 1000;
+                if(copyTime < 0) {                    
+                    startSound();
+                    clearInterval(timerInterval);
+                    act(timer, msTime, times);
+                }
+            },1000);
+        }
+
+        async function act(timer, msTime, times){
+            document.getElementById("remaining").innerHTML = times;
+            setTimeout(() => timer.classList.remove("rest"), 1000);
+            let copyTime = msTime;
+            timerInterval = await setInterval(() => {
+                timer.innerHTML = `${copyTime*0.001}s`;
+                copyTime -= 1000;
+                if(copyTime < 0){
+                    times === 0 ? endSound() : stopSound();
+                    clearInterval(timerInterval);
+                    rest(timer, msTime, --times);
+                }
+            },1000);
+        }
+
+        async function start(button){
+            button.disabled = true;
+            let time = +document.getElementById("time").value;
+            time *= 1000;
+            let times = +document.getElementById("times").value - 1;
+            let timer = document.querySelector("#timer");
+            timer.classList.remove("disabled");
+            await act(timer, time, times);
+        }
+    </script>
+    <style>
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            transition: color .4s, border .4s;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input {
+            width: 10vw;
+        }
+
+        .rest {
+            color: rgba(0, 0, 0, 0.356);
+        }
+
+        #container {
+            margin: auto;
+            text-align: center;
+            width: 90vw;
+            height: 40vh;
+            padding: 20px;
+            margin-top: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 15px;
+            background-color: #cae4e8;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #container {
+                width: 90vw;
+                height: 40vw;
+                padding: 20px;
+                margin-top: 20px;
+            }   
+        }
+
+        #start:disabled {
+            border-color: rgb(209, 209, 209);
+            background-image: linear-gradient(-5deg, gray, rgb(99, 85, 85));
+            color: gray;
+        }
+
+        #timer, #done {
+            margin: auto;
+            margin-top: 100px;
+            border: solid 1px gray;
+            text-align: center;
+            width: 40vw;
+            padding: 50px;
+            font-weight: 900;
+            font-size: x-large;
+            border-radius: 15px;
+            background-color: #cae4e8
+        }
+
+        #rem-ctn {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #start {
+            border: solid rgb(63, 63, 63) 1px;
+            color: rgb(255, 255, 255);
+            width: 100px;
+            border-radius: 20px;
+            font-weight: 600;
+            background-image: linear-gradient(-5deg, green, #33e433);
+        }
+
+        #start:disabled {
+            border: solid rgb(209, 209, 209) 1px;
+            color: rgb(209, 209, 209);
+        }
+    </style>
+</head>
+<body>
+    <audio id="startSound">
+        <source src="start.ogg" type="audio/ogg">
+    </audio>
+    <audio id="stopSound">
+        <source src="stop.ogg" type="audio/ogg">
+    </audio>
+    <audio id="endSound">
+        <source src="end.ogg" type="audio/ogg">
+    </audio>
+    <div id="container">
+        <div>
+            <label>SECONDS:</label>
+            <input id="time" type="number" placeholder="seconds" value="15">
+        </div>
+        <div>            
+            <label>TIMES:</label>
+            <input id="times" type="number" placeholder="times" value="7">
+        </div>
+        <button id="start" onclick="start(this)">START</button>
+    </div>
+    <div id="rem-ctn">
+        <b>Remaining:</b> <span id="remaining">x</span>
+    </div>
+    <div id="timer" class="rest">
+        READY?
+    </div>
+</body>
+</html>
