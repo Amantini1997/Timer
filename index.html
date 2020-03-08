@@ -164,12 +164,14 @@
     </audio>
     <div id="container">
         <div>
-            <label>SECONDS:</label>
-            <input id="time" type="number" placeholder="seconds" value="15">
+            <label for="time">SECONDS:</label>
+            <input id="time" type="number" inputmode="numeric"
+                   placeholder="seconds" value="15">
         </div>
         <div>            
-            <label>TIMES:</label>
-            <input id="times" type="number" placeholder="times" value="7">
+            <label for="times">TIMES:</label>
+            <input id="times" type="number" inputmode="numeric"
+                   placeholder="times" value="7">
         </div>
         <button id="start" onclick="start(this)">START</button>
     </div>
