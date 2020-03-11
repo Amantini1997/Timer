@@ -1,0 +1,80 @@
+
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            transition: color .4s, border .4s;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input {
+            width: 10vw;
+        }
+
+        .rest {
+            color: rgba(0, 0, 0, 0.356);
+        }
+
+        #container {
+            margin: auto;
+            text-align: center;
+            width: 90vw;
+            height: 40vh;
+            padding: 20px;
+            margin-top: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 15px;
+            background-color: #cae4e8;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #container {
+                width: 90vw;
+                height: 40vw;
+                padding: 20px;
+                margin-top: 20px;
+            }   
+        }
+
+        #start:disabled {
+            border-color: rgb(209, 209, 209);
+            background-image: linear-gradient(-5deg, gray, rgb(99, 85, 85));
+            color: gray;
+        }
+
+        #timer, #done {
+            margin: auto;
+            margin-top: 100px;
+            border: solid 1px gray;
+            text-align: center;
+            width: 40vw;
+            padding: 50px;
+            font-weight: 900;
+            font-size: x-large;
+            border-radius: 15px;
+            background-color: #cae4e8
+        }
+
+        #rem-ctn {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #start {
+            border: solid rgb(63, 63, 63) 1px;
+            color: rgb(255, 255, 255);
+            width: 100px;
+            border-radius: 20px;
+            font-weight: 600;
+            background-image: linear-gradient(-5deg, green, #33e433);
+        }
+
+        #start:disabled {
+            border: solid rgb(209, 209, 209) 1px;
+            color: rgb(209, 209, 209);
+        }
