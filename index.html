@@ -7,29 +7,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="styles/index.css">
     <script src="scripts/index.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('scripts/sw.js');
-        }
-
-        var CACHE_NAME = 'timer-cache';
-        var urlsToCache = [
-            '/',
-            '/styles/index.css',
-            '/script/index.js'
-        ];
-
-        self.addEventListener('install', event => {
-            // Perform install steps
-            event.waitUntil(
-                caches.open(CACHE_NAME)
-                .then(cache => {
-                    console.log('Opened cache');
-                    return cache.addAll(urlsToCache);
-                })
-            );
-        });
-    </script>
+    <script src="scripts/pwa.js"></script>
 </head>
 <body>
     <audio id="startSound">
