@@ -1,9 +1,16 @@
 var CACHE_NAME = 'timer-cache';
 var urlsToCache = [
-  '/',
-  '/styles/index.css',
-  '/scripts/index.js'
+  '',
+  'styles/index.css',
+  'scripts/index.js'
 ];
+
+// USE OUTSIDE GITHUB PAGES
+// var urlsToCache = [
+//   '/',
+//   '/styles/index.css',
+//   '/scripts/index.js'
+// ];
 
 
 self.addEventListener('install', event => {
