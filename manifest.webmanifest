@@ -4,32 +4,12 @@
     "description": "A repeatable timer",
     "icons": [
         {
-            "src": "images/48x48/timer.jpg",
-            "type": "image/jpg",
-            "sizes": "48x48"
-        },
-        {
-            "src": "images/72x72/timer.jpg",
-            "type": "image/jpg",
-            "sizes": "72x72"
-        },
-        {
-            "src": "images/96x96/timer.jpg",
-            "type": "image/jpg",
-            "sizes": "96x96"
-        },
-        {
-            "src": "images/144x144/timer.jpg",
-            "type": "image/jpg",
-            "sizes": "144x144"
-        },
-        {
-            "src": "images/192x192/timer.jpg",
+            "src": "192x192.jpg",
             "type": "image/jpg",
             "sizes": "192x192"
         },
         {
-            "src": "images/512x512/timer.jpg",
+            "src": "512x512.jpg",
             "type": "image/jpg",
             "sizes": "512x512"
         }
