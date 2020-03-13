@@ -34,7 +34,7 @@
             "sizes": "512x512"
         }
     ],
-    "start_url": "",
+    "start_url": "/Timer/",
     "background_color": "white",
     "display": "fullscreen",
     "scope": "",
