@@ -37,6 +37,6 @@
     "start_url": "/Timer/",
     "background_color": "white",
     "display": "fullscreen",
-    "scope": "",
+    "scope": "/Timer/",
     "theme_color": "gray"
   }
