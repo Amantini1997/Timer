@@ -4,37 +4,37 @@
     "description": "A repeatable timer",
     "icons": [
         {
-            "src": "/images/48x48/timer.jpg",
+            "src": "images/48x48/timer.jpg",
             "type": "image/jpg",
             "sizes": "48x48"
         },
         {
-            "src": "/images/72x72/timer.jpg",
+            "src": "images/72x72/timer.jpg",
             "type": "image/jpg",
             "sizes": "72x72"
         },
         {
-            "src": "/images/96x96/timer.jpg",
+            "src": "images/96x96/timer.jpg",
             "type": "image/jpg",
             "sizes": "96x96"
         },
         {
-            "src": "/images/144x144/timer.jpg",
+            "src": "images/144x144/timer.jpg",
             "type": "image/jpg",
             "sizes": "144x144"
         },
         {
-            "src": "/images/192x192/timer.jpg",
+            "src": "images/192x192/timer.jpg",
             "type": "image/jpg",
             "sizes": "192x192"
         },
         {
-            "src": "/images/512x512/timer.jpg",
+            "src": "images/512x512/timer.jpg",
             "type": "image/jpg",
             "sizes": "512x512"
         }
     ],
-    "start_url": "/",
+    "start_url": "index.html",
     "background_color": "white",
     "display": "fullscreen",
     "scope": "/",
