@@ -2,7 +2,9 @@ var CACHE_NAME = 'timer-cache';
 var urlsToCache = [
   '',
   'styles/index.css',
-  'scripts/index.js'
+  'scripts/index.js',
+  'images/192x192.png',
+  'images/512x512.png'
 ];
 
 // USE OUTSIDE GITHUB PAGES

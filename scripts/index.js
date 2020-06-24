@@ -21,7 +21,7 @@ function printTime(e = null, msTime){
 async function rest(timer, msTime, times){
     if(times < 0){
         timer.innerHTML = "DONE!";
-        document.querySelector("#start").disabled = false;
+        document.getElementById("start").disabled = false;
         return;
     }
     setTimeout(() => timer.classList.add("rest"), 1000);
@@ -57,7 +57,7 @@ async function start(button){
     let time = +document.getElementById("time").value;
     time *= 1000;
     let times = +document.getElementById("times").value - 1;
-    let timer = document.querySelector("#timer");
+    let timer = document.getElementById("timer");
     timer.classList.remove("disabled");
     await act(timer, time, times);
 }

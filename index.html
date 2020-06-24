@@ -10,9 +10,6 @@
     <link rel="manifest" href="manifest.webmanifest">
     <!-- CSS -->
     <link rel="stylesheet" href="styles/index.css">
-    <!-- JS -->
-    <script src="scripts/index.js"></script>
-    <script src="scripts/pwa.js"></script>
 </head>
 <body>
     <audio id="startSound">
@@ -28,12 +25,12 @@
         <div>
             <label for="time">SECONDS:</label>
             <input id="time" type="text" inputmode="numeric"
-                   pattern="[0-9]*" placeholder="seconds" value="15">
+                   pattern="[0-9]*" placeholder="seconds" value="30">
         </div>
         <div>            
             <label for="times">TIMES:</label>
             <input id="times" type="text" inputmode="numeric"
-                   pattern="[0-9]*" placeholder="times" value="7" >
+                   pattern="[0-9]*" placeholder="times" value="8" >
         </div>
         <button id="start" onclick="start(this)">START</button>
     </div>
@@ -43,6 +40,10 @@
     <div id="timer" class="rest">
         READY?
     </div>
+    <!-- JS -->
+    <script src="scripts/index.js"></script>
+    <script src="scripts/pwa.js"></script>
+    <script src="sw.js"></script>
 </body>
 </html>
 
