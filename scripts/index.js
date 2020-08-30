@@ -3,15 +3,9 @@ let wakeLock = null;
 // create an async function to request a wake lock
 const requestWakeLock = async () => {
   try {
-    wakeLock = await navigator.wakeLock.request('screen');
-
-    // change up our interface to reflect wake lock active
-    statusElem.textContent = 'Wake Lock is active!';
-
+    wakeLock = await navigator.wakeLock.request('screen')
   } catch (err) {
-
-    // if wake lock request fails - usually system related, such as battery
-    statusElem.textContent = `${err.name}, ${err.message}`;
+    console.log(`${err.name}, ${err.message}`);
 
   }
 }
