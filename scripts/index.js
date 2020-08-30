@@ -1,5 +1,3 @@
-window.onload = requestWakeLock;
-
 let wakeLock = null;
   
 // create an async function to request a wake lock
@@ -17,6 +15,8 @@ const requestWakeLock = async () => {
 
   }
 }
+
+window.onload = requestWakeLock;
 
 function playAudio(audioID) {
     document.getElementById(audioID).play()
