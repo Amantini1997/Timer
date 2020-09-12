@@ -1,16 +1,21 @@
 let wakeLock = null;
   
-// create an async function to request a wake lock
-const requestWakeLock = async () => {
+async function requestWakeLock() {
   try {
-    wakeLock = await navigator.wakeLock.request('screen')
+    wakeLock = await navigator.wakeLock.request('screen');
+    console.log('Screen Locked');
   } catch (err) {
     console.log(`${err.name}, ${err.message}`);
-
   }
 }
 
-window.onload = requestWakeLock;
+function releaseWakeLock() {
+    wakeLock.release();
+    wakeLock = null;
+    console.log('Screen Unlocked');
+}
+
+requestWakeLock();
 
 function playAudio(audioID) {
     document.getElementById(audioID).play()
