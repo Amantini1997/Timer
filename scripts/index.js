@@ -1,82 +1,74 @@
-let wakeLock = null;
-  
-async function requestWakeLock() {
-  try {
-    wakeLock = await navigator.wakeLock.request('screen');
-    console.log('Screen Locked');
-  } catch (err) {
-    console.log(`${err.name}, ${err.message}`);
-  }
-}
+var counterPerformedElement = document.getElementById("performed");
+var startElement = document.getElementById("start");
+var timerElement = document.getElementById("timer");
 
-function releaseWakeLock() {
-    wakeLock.release();
-    wakeLock = null;
-    console.log('Screen Unlocked');
-}
+var cycleDuration;
+var numberOfCycles;
+var cyclesLeft;
 
-requestWakeLock();
-
-function playAudio(audioID) {
-    document.getElementById(audioID).play()
-}
-
-function startSound() {
-    playAudio("startSound");
-}
-
-function stopSound() {
-    playAudio("stopSound");
-}
-
-function endSound() {
-    playAudio("endSound");
-}
-
-function printTime(e = null, msTime){
-    e.innerHtml = `${msTime}s`;
-}
-
-async function rest(timer, msTime, times){
-    if(times < 0){
-        timer.innerHTML = "DONE!";
-        document.getElementById("start").disabled = false;
+async function rest() {
+    if(cyclesLeft === 0){
+        timerElement.innerHTML = "DONE!";
+        startElement.disabled = false;
         return;
     }
-    setTimeout(() => timer.classList.add("rest"), 1000);
-    let copyTime = msTime;
+    setTimeout(() => timerElement.classList.add("rest"), 1_000);
+    let copyCycleDuration = cycleDuration;
     timerInterval = await setInterval(() => {
-        timer.innerHTML = `${copyTime*0.001}s`;
-        copyTime -= 1000;
-        if(copyTime < 0) {                    
+        timerElement.innerHTML = `${copyCycleDuration*0.001}s`;
+        copyCycleDuration -= 1000;
+        if(copyCycleDuration < 0) {                    
             startSound();
             clearInterval(timerInterval);
-            act(timer, msTime, times);
+            act(timerElement, cycleDuration, cyclesLeft);
         }
-    },1000);
+    }, 1_000);
 }
 
-async function act(timer, msTime, times){
-    document.getElementById("remaining").innerHTML = times;
-    setTimeout(() => timer.classList.remove("rest"), 1000);
-    let copyTime = msTime;
+async function act(cyclesLeft) {
+    setTimeout(() => timerElement.classList.remove("rest"), 1_000);
+    let copyCycleDuration = cycleDuration;
     timerInterval = await setInterval(() => {
-        timer.innerHTML = `${copyTime*0.001}s`;
-        copyTime -= 1000;
-        if(copyTime < 0){
-            times === 0 ? endSound() : stopSound();
+        timerElement.innerHTML = `${copyCycleDuration*0.001}s`;
+        copyCycleDuration -= 1000;
+        if(copyCycleDuration < 0){
+            increaseCounter();
+            cyclesLeft === 0 ? endSound() : stopSound();
             clearInterval(timerInterval);
-            rest(timer, msTime, --times);
+            rest(cycleDuration, --cyclesLeft);
         }
-    },1000);
+    }, 1_000);
 }
 
-async function start(button){
+async function start(button) {
     button.disabled = true;
-    let time = +document.getElementById("time").value;
-    time *= 1000;
-    let times = +document.getElementById("times").value - 1;
-    let timer = document.getElementById("timer");
-    timer.classList.remove("disabled");
-    await act(timer, time, times);
+    cycleDuration = +document.getElementById("duration").value * 1_000;
+    numberOfCycles = +document.getElementById("cycles").value;
+    initialiseCounter();
+    timerElement.classList.remove("disabled");
+    await act(cyclesLeft);
+}
+
+function initialiseCounter() {
+    cyclesLeft = numberOfCycles;
+    counterPerformedElement.innerHTML = numberOfCycles - cyclesLeft;
+    document.getElementById("total").innerHTML = "/ " + numberOfCycles;
+}
+
+function increaseCounter() {
+    cyclesLeft--;
+    counterPerformedElement.innerHTML = numberOfCycles - cyclesLeft; 
+}
+
+// expect waiting time in seconds
+function waitTimeAndThenCall(waitingTime, callback, checkTime=200) {
+    const endTime = new Date();
+    endTime.setSeconds(endTime.getSeconds() + waitingTime);
+    const interval = setInterval(() => {
+        console.log(new Date().getTime(), endTime.getTime(), new Date().getTime() < endTime.getTime())
+        if (new Date().getTime() > endTime.getTime()) {
+            clearInterval(interval);
+            callback();
+        }
+    }, checkTime);
 }

@@ -6,12 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Timer</title>
     <link rel="shortcut icon" href="favicon.ico" />
-    <!-- Manifest -->
     <link rel="manifest" href="manifest.webmanifest">
-    <!-- CSS -->
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
+    <!-- SOUNDS -->
     <audio id="startSound">
         <source src="start.ogg" type="audio/ogg">
     </audio>
@@ -21,28 +20,43 @@
     <audio id="endSound">
         <source src="end.ogg" type="audio/ogg">
     </audio>
-    <div id="container">
+
+
+    <!-- TIMER options -->
+    <div id="container" class="blue-ctn">
         <div>
-            <label for="time">SECONDS:</label>
-            <input id="time" type="text" inputmode="numeric"
-                   pattern="[0-9]*" placeholder="seconds" value="30">
+            <label for="duration">SECONDS </label>
+            <input id="duration" type="number" inputmode="numeric"
+                   pattern="[0-9]*" placeholder="" value="1"
+            >
         </div>
         <div>            
-            <label for="times">TIMES:</label>
-            <input id="times" type="text" inputmode="numeric"
-                   pattern="[0-9]*" placeholder="times" value="8" >
+            <label for="cycles">TIMES </label>
+            <input id="cycles" type="number" inputmode="numeric"
+                   pattern="[0-9]*" placeholder="" value="8"
+            >
         </div>
         <button id="start" onclick="start(this)">START</button>
     </div>
-    <div id="rem-ctn">
+
+    <!-- TIMER info -->
+    <div id="counter">
+        <b>Performed:</b> 
+        <span id="performed">0</span> 
+        <span id="total">/ 0</span>
+    </div>    
+    <!-- <div id="rem-ctn">
         <b>Remaining:</b> <span id="remaining">x</span>
-    </div>
-    <div id="timer" class="rest">
+    </div> -->
+    <div id="timer" class="rest blue-ctn">
         READY?
     </div>
+
     <!-- JS -->
     <script src="scripts/index.js"></script>
+    <script src="scripts/sounds.js"></script>
     <script src="scripts/pwa.js"></script>
+    <script src="scripts/screenLocker.js"></script>
     <script src="sw.js"></script>
 </body>
 </html>

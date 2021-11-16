@@ -1,81 +1,105 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* transition: color .4s, border .4s; */
+    font-size: x-large;
+}
 
-        * {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            transition: color .4s, border .4s;
-        }
+label {
+    font-weight: 600;
+    color: #fff;
+}
 
-        label {
-            font-weight: 600;
-        }
+input {
+    width: 8.5vw;
+    border: none;
+    border-radius: 6px;
+    padding: 0 7px;
+    text-align: right;
+}
 
-        input {
-            width: 10vw;
-        }
+button {
+    cursor: pointer;
+}
 
-        .rest {
-            color: rgba(0, 0, 0, 0.356);
-        }
+.rest {
+    color: rgba(0, 0, 0, 0.356);
+}
 
-        #container {
-            margin: auto;
-            text-align: center;
-            width: 90vw;
-            height: 40vh;
-            padding: 20px;
-            margin-top: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 15px;
-            background-color: #cae4e8;
-            border: solid 1px gray;
-        }
+#container {
+    width: 90vw;
+    min-height: 50vh;
+    padding: 20px;
+    margin-top: 20px;
+}
 
-        @media only screen and (max-width: 600px) {
-            #container {
-                width: 90vw;
-                height: 40vw;
-                padding: 20px;
-                margin-top: 20px;
-            }   
-        }
+@media only screen and (max-width: 600px) {
+    #container {
+        min-height: fit-content;
+    }   
 
-        #start:disabled {
-            border-color: rgb(209, 209, 209);
-            background-image: linear-gradient(-5deg, gray, rgb(99, 85, 85));
-            color: gray;
-        }
+    #container > *:not(:first-child) {
+        margin-top: 20px;
+    }
+}
 
-        #timer, #done {
-            margin: auto;
-            margin-top: 100px;
-            border: solid 1px gray;
-            text-align: center;
-            width: 40vw;
-            padding: 50px;
-            font-weight: 900;
-            font-size: x-large;
-            border-radius: 15px;
-            background-color: #cae4e8
-        }
+.blue-ctn {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    margin: auto;
+    text-align: center;
+    background-color: #3f9eff;
+    box-shadow: inset  6px  6px 14px  3px #92ddff, 
+                inset -5px -4px 14px  2px #002e42, 
+                       0px  7px  9px -3px #123240;
+}
 
-        #rem-ctn {
-            text-align: center;
-            margin-top: 10px;
-        }
+#start {
+    /* border: solid rgb(63, 63, 63) 1px; */
+    /* border: none;
+    color: rgb(255, 255, 255);
+    width: 100px;
+    border-radius: 20px;
+    font-weight: 600;
+    background-image: linear-gradient(-5deg, rgb(0, 126, 0), #33e433); */
+    box-shadow: inset  3px  4px 12px 0px #6cc56c, 
+                inset -4px -3px 14px 0px #052605;
+    border-radius: 7px;
+    border: none;
+    color: rgb(255, 255, 255);
+    background: #228e22;
+    /* width: 100px; */
+    font-weight: 600;
+    /* background-image: linear-gradient(-5deg, green, #33e433); */
+    padding: 11px 19px;
+    transition: all .2;
+}
 
-        #start {
-            border: solid rgb(63, 63, 63) 1px;
-            color: rgb(255, 255, 255);
-            width: 100px;
-            border-radius: 20px;
-            font-weight: 600;
-            background-image: linear-gradient(-5deg, green, #33e433);
-        }
+#start:disabled {
+    box-shadow: inset  0px 0px 0px 0px #6cc56c, 
+                inset  0px 0px 0px 0px #052605;
+    background-image: linear-gradient(-5deg, gray, rgb(99, 85, 85));
+    /* border-color: rgb(209, 209, 209); */
+    color: rgb(209, 209, 209);
+}
 
-        #start:disabled {
-            border: solid rgb(209, 209, 209) 1px;
-            color: rgb(209, 209, 209);
-        }
+#timer, #done {
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+    width: 40vw;
+    padding: 50px;
+    font-weight: 900;
+    font-size: x-large;
+    border-radius: 15px;
+    background-color: #cae4e8
+}
+
+#counter {
+    font-size: x-large;
+    text-align: center;
+    margin-top: 100px;
+}
