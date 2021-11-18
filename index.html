@@ -23,20 +23,22 @@
 
 
     <!-- TIMER options -->
-    <div id="container" class="timer-ctn neuromorph">
+    <div id="container" class="timer-ctn neumorph">
         <div>
             <label for="duration">SECONDS </label>
-            <input id="duration" type="number" inputmode="numeric"
-                   pattern="[0-9]*" placeholder="" value="1"
+            <input id="duration" class="neumorph" 
+                   type="number" inputmode="numeric"
+                   pattern="[0-9]*" placeholder="" value="30"
             >
         </div>
         <div>            
             <label for="cycles">TIMES </label>
-            <input id="cycles" type="number" inputmode="numeric"
+            <input id="cycles" class="neumorph"
+                   type="number" inputmode="numeric"
                    pattern="[0-9]*" placeholder="" value="8"
             >
         </div>
-        <button id="start" class="neuromorph convex" onclick="start(this)">START</button>
+        <button id="start" class="neumorph convex" onclick="start(this)">START</button>
     </div>
 
     <!-- TIMER info -->
@@ -48,7 +50,7 @@
     <!-- <div id="rem-ctn">
         <b>Remaining:</b> <span id="remaining">x</span>
     </div> -->
-    <div id="timer" class="rest neuromorph">
+    <div id="timer" class="rest neumorph">
         READY?
     </div>
 

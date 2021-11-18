@@ -2,6 +2,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     /* transition: color .4s, border .4s; */
     font-size: x-large;
+    box-sizing: border-box;
 }
 
 body {
@@ -9,6 +10,8 @@ body {
     height: 100vh;
     width: 100vw;
     background-color: #e0e5ec;
+    display: flex;
+    flex-direction: column;
 }
 
 label {
@@ -16,11 +19,25 @@ label {
 }
 
 input {
-    width: 8.5vw;
     border: none;
     border-radius: 6px;
     padding: 0 7px;
     text-align: right;
+    width: 71px;
+    padding: 0 15px;
+}
+
+/* Hide arrows */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 button {
@@ -40,12 +57,11 @@ button {
     border-radius: 15px;
     margin: auto;
     text-align: center;
-    margin-top: 20px;
-    width: 90vw;
+    width: 80vw;
     min-height: 50vh;
     padding: 20px;
 
-    /* REPLACED BY NEUROMORPH */
+    /* REPLACED BY neumorph */
     /* background-color: #3f9eff;
     box-shadow: inset  6px  6px 14px  3px #92ddff, 
                 inset -5px -4px 14px  2px #002e42, 
@@ -62,10 +78,20 @@ button {
     }
 }
 
-.neuromorph {
+.neumorph {
     box-shadow: -9px -9px 16px #fff, 
                  9px  9px 16px #a3b1c6;
     color: rgb(85, 91, 99);
+    transition: all .2s;
+}
+
+input.neumorph {
+    box-shadow: inset 4px 4px 8px #a3b1c6,
+                inset -4px -4px 8px #fff;
+    /* box-shadow: inset -9px -9px 16px #fff, 
+                inset 9px 9px 16px #a3b1c6; */
+    color: rgb(85, 91, 99);
+    background-color: transparent;
     transition: all .2s;
 }
 
@@ -97,21 +123,26 @@ button {
     color: rgb(209, 209, 209);
 }
 
-#timer, #done {
+#timer {
     margin: auto;
-    margin-top: 100px;
     text-align: center;
-    width: 40vw;
-    padding: 50px;
+    width: 160px;
+    height: 140px;
     font-weight: 900;
     font-size: x-large;
     border-radius: 15px;
+    display: grid;
+    place-items: center;
     /* background-color: #cae4e8 */
+}
+
+#timer.rest {
+    color: rgb(172, 184, 199);
 }
 
 #counter {
     font-size: x-large;
     text-align: center;
-    margin-top: 100px;
+    /* margin-top: 100px; */
     color: #516172;
 }
