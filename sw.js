@@ -3,6 +3,8 @@ var urlsToCache = [
   '',
   'styles/index.css',
   'scripts/index.js',
+  'scripts/screenLocker.js',
+  'scripts/sounds.js',
   'images/192x192.png',
   'images/512x512.png'
 ];
@@ -17,22 +19,18 @@ var urlsToCache = [
 
 self.addEventListener('install', event => {
   // Perform install steps
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-          console.log('Opened cache');
-          return cache.addAll(urlsToCache);
-      })
-  );
+  event.waitUntil((async () => {
+    const cache = await caches.open(cacheName);
+    console.log('[Service Worker] Caching all: app shell and content');
+    await cache.addAll(contentToCache);
+  })());
 });
 
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-          // Cache hit - return response
-          return response || fetch(event.request);
-      }
-    )
-  );
+  console.log('[Service Worker] Install');
+  event.waitUntil((async () => {
+    const cache = await caches.open(cacheName);
+    console.log('[Service Worker] Caching all: app shell and content');
+    await cache.addAll(contentToCache);
+  })());
 });
