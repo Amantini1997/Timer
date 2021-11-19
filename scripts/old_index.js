@@ -6,10 +6,6 @@ var cycleDuration;
 var numberOfCycles;
 var cyclesLeft;
 
-function toggleRestActiveTimer() {
-    
-}
-
 async function rest() {
     if(cyclesLeft === 0){
         timerElement.innerHTML = "DONE!";
