@@ -13,7 +13,7 @@ const URLS_TO_CACHE = [
   'sounds/end.ogg',
   'images/192x192.png',
   'images/512x512.png'
-].map(path => (APP_IS_DEPLOYED_ON_GITHUB_PAGES ? "" : "/") + path);
+].map(path => (APP_IS_DEPLOYED_ON_GITHUB_PAGES ? "" : "./") + path);
 
 // Add RxJs CDN
 URLS_TO_CACHE.push('https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js');
