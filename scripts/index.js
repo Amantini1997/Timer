@@ -60,11 +60,14 @@ function updateTimerDisplay(endTime) {
     const currentTime = new Date();
 
     // get time difference in seconds
-    const remainingSeconds = Math.abs(endTime - currentTime) / 1_000;
+    let remainingSeconds = Math.abs(endTime - currentTime) / 1_000;
 
-    // assign default value to milliseconds if remainingSeconds
-    // is integer
-    let [seconds, milliseconds = "00"] = (remainingSeconds + "00").split(".");
+    // add millisecond if remainingSeconds is integer
+    remainingSeconds += Number.isInteger(remainingSeconds) 
+                        ? ".00"
+                        :  "00";
+
+    let [seconds, milliseconds] = remainingSeconds.split(".");
 
     // add leading 0s to seconds if less than 10 seconds
     seconds = ("00" + seconds).slice(- Math.max(seconds.length, 2));
