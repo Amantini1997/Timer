@@ -24,7 +24,7 @@ const ASSETS_TO_CACHE = [
   './manifest.webmanifest',
 
   'https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js'
-]
+];
 
 // .map(path => (APP_IS_DEPLOYED_ON_GITHUB_PAGES ? "./" : "/") + path);
 
