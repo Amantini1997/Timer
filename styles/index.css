@@ -12,6 +12,12 @@ body {
     background-color: #e0e5ec;
     display: flex;
     flex-direction: column;
+    /* prevent pull-down refresh on mobile */
+    overscroll-behavior: contain;
+}
+
+button {
+    cursor: pointer;
 }
 
 label {
@@ -38,10 +44,6 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
-}
-
-button {
-    cursor: pointer;
 }
 
 .rest {
