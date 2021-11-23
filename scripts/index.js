@@ -1,71 +1,73 @@
-const { interval, pipe, timer } = rxjs;
-const { take, takeUntil, finalize } = rxjs.operators;
+// const { interval, pipe, timer } = rxjs;
+// const { take, takeUntil, finalize } = rxjs.operators;
 
 const counterPerformedElement = document.getElementById("performed");
 const startElement = document.getElementById("start");
 const timerElement = document.getElementById("timer");
 
-const TIMER_REFRESH_DELAY = 55;
-let cycleDurationInSeconds;
-let numberOfCycles;
-let cyclesLeft;
-let timerIsActive = false;
+let timerWorker;
 
-// Alternate rest and active state
-function toggleRestActiveTimer() {
-    // Change the state effective state of the counter
-    toggleTimerIsActive();
-    // Terminate if all the cycles have been performed
-    if (cyclesLeft === 0) return;
-    // Calculate the time at which the current cycle
-    // should terminate
-    const endTime = new Date();
-    endTime.setSeconds(endTime.getSeconds() + cycleDurationInSeconds);
-    // Set recursion
-    interval(TIMER_REFRESH_DELAY)
-        .pipe(
-            takeUntil(timer(endTime)),
-            finalize(toggleRestActiveTimer)
-        )
-        .subscribe(() => updateTimerDisplay(endTime));
+let totalActiveCycles;
+let activeCyclesLeft;
+
+// array containing the end time of all the cycles (active & rest)
+let cyclesEndTime;
+// reference to the next end cycle. needed to avoid refresh issues
+// related to inactive tab slowed down activity.
+let nextCycleEndTime;
+
+function initialiseWorker() {
+    timerWorker = new Worker("./scripts/timerWorker.js");
+    timerWorker.onmessage = ({ data }) => {
+        const { command, args } = data;
+        switch (command) {
+            case "update:cycleTime": 
+                updateTimerDisplay();
+                break;
+            case "end:cycle": 
+                setTimerIsActive(args[0]);
+                break;
+        }
+    }
 }
 
-function toggleTimerIsActive() {
-    timerIsActive ? setTimerRest(): setTimerActive();
-    timerIsActive = !timerIsActive;
-    timerElement.classList.toggle("rest");
+function setTimerIsActive(cyclesLeft = totalActiveCycles * 2) {
+    const currentCycleIndex = cyclesEndTime.length - cyclesLeft; 
+    nextCycleEndTime = cyclesEndTime[currentCycleIndex];
+    activeCyclesLeft = Math.floor((cyclesLeft - 1) / 2);
+    const timerIsActive = cyclesLeft % 2 === 0;
+    timerIsActive ? setTimerActive(): setTimerRest();
+    timerElement.classList.toggle("rest", !timerIsActive);
 }
 
 function setTimerActive() {
-    cyclesLeft === 0 
+    activeCyclesLeft === 0 
         ? endSound() 
         : stopSound();
 }
 
 function setTimerRest() {
-    decreaseCyclesLeft();
-    cyclesLeft === 0 
+    updateCyclesPerformedText();
+    activeCyclesLeft === 0 
         ? endTimer()
         : startSound()
 }
 
 function endTimer() {
     endSound();
+    timerWorker.terminate();
     timerElement.innerHTML = "DONE!";
     startElement.disabled = false;
-    return;
 }
 
-function updateTimerDisplay(endTime) {
+function updateTimerDisplay() {
     const currentTime = new Date();
 
     // get time difference in seconds
-    let remainingSeconds = Math.abs(endTime - currentTime) / 1_000;
+    let remainingSeconds = Math.abs(nextCycleEndTime - currentTime) / 1_000;
 
     // add millisecond if remainingSeconds is integer
-    remainingSeconds += Number.isInteger(remainingSeconds) 
-                        ? ".00"
-                        :  "00";
+    remainingSeconds += (Number.isInteger(remainingSeconds) ? "." : "") + "00";
 
     let [seconds, milliseconds] = remainingSeconds.split(".");
 
@@ -75,30 +77,38 @@ function updateTimerDisplay(endTime) {
     milliseconds = milliseconds.substring(0, 2);
 
     timerElement.innerHTML = `${[seconds, milliseconds].join(".")}s`;
-    
-    // if (keepDebugging) myDebugger.push(obj);
 }
 
-async function start(button) {
-    button.disabled = true;
-    cycleDurationInSeconds = +document.getElementById("duration").value;
-    numberOfCycles = +document.getElementById("cycles").value;
-    timerElement.classList.remove("disabled");
+function start(button) {
+    totalActiveCycles = +document.getElementById("cycles").value;
+    const cycleDurationInSeconds = +document.getElementById("duration").value;
+    generateCycles(cycleDurationInSeconds);
     initialiseCounter();
-    toggleRestActiveTimer();
+    setTimerIsActive();
+
+    initialiseWorker();
+    timerWorker.postMessage({ cyclesEndTime });
+
+    // prevent disabling if error
+    button.disabled = true;
+    timerElement.classList.remove("disabled");
 }
 
 function initialiseCounter() {
-    cyclesLeft = numberOfCycles;
+    activeCyclesLeft = totalActiveCycles;
     updateCyclesPerformedText();
-    document.getElementById("total").innerHTML = "/ " + numberOfCycles;
-}
-
-function decreaseCyclesLeft() {
-    cyclesLeft--;
-    updateCyclesPerformedText(); 
+    document.getElementById("total").innerHTML = "/ " + totalActiveCycles;
 }
 
 function updateCyclesPerformedText() {
-    counterPerformedElement.innerHTML = numberOfCycles - cyclesLeft;
+    counterPerformedElement.innerHTML = totalActiveCycles - activeCyclesLeft;
+}
+
+function generateCycles(cycleDurationInSeconds) {
+    cyclesEndTime = [];
+    let nextCycleEndTime = new Date();
+    for (let i = 0; i < totalActiveCycles * 2; i++) {
+        nextCycleEndTime.setSeconds(nextCycleEndTime.getSeconds() + cycleDurationInSeconds);
+        cyclesEndTime.push(new Date(nextCycleEndTime.getTime()));
+    }
 }

@@ -11,6 +11,7 @@ const ASSETS_TO_CACHE = [
   './scripts/screenLocker.js',
   './scripts/sounds.js',
   './scripts/pwa.js',
+  './scripts/timerWorker.js',
 
   './sounds/start.ogg',
   './sounds/stop.ogg',
@@ -18,6 +19,9 @@ const ASSETS_TO_CACHE = [
 
   './images/192x192.png',
   './images/512x512.png',
+
+  './favicon.ico',
+  './manifest.webmanifest',
 
   'https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js'
 ]
