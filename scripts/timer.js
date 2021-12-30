@@ -1,6 +1,3 @@
-// const { interval, pipe, timer } = rxjs;
-// const { take, takeUntil, finalize } = rxjs.operators;
-
 const counterPerformedElement = document.getElementById("performed");
 const startElement = document.getElementById("start");
 const timerElement = document.getElementById("timer");
@@ -41,16 +38,17 @@ function setTimerIsActive(cyclesLeft = totalActiveCycles * 2) {
 }
 
 function setTimerActive() {
-    activeCyclesLeft === 0 
-        ? endSound() 
-        : restSound();
+    activeSound();
 }
 
 function setTimerRest() {
     updateCyclesPerformedText();
-    activeCyclesLeft === 0 
-        ? endTimer()
-        : activeSound();
+    if (activeCyclesLeft === 0) {
+        endSound();
+        endTimer();
+    } else {
+        restSound();
+    }
 }
 
 function endTimer() {

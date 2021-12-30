@@ -4,19 +4,27 @@ const AUDIOS = {
     end: new Audio("../sounds/end.ogg"),
 }
 
+let lastPlayedAudio = AUDIOS.rest;
+
+function clearAudio() {
+    lastPlayedAudio.pause();
+    lastPlayedAudio.currentTime = 0;
+}
+
 function playAudio(audio) {
-    console.log(audio, new Date().getSeconds())
-    AUDIOS[audio].play();
+    clearAudio();
+    audio.play();
+    lastPlayedAudio = audio;
 }
 
 function activeSound() {
-    playAudio("active");
+    playAudio(AUDIOS.active);
 }
 
 function restSound() {
-    playAudio("rest");
+    playAudio(AUDIOS.rest);
 }
 
 function endSound() {
-    playAudio("end");
+    playAudio(AUDIOS.end);
 }
