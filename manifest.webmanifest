@@ -15,8 +15,8 @@
         }
     ],
     "start_url": "/Timer/",
-    "background_color": "white",
+    "background_color": "#e0e5ec",
     "display": "fullscreen",
     "scope": "/Timer/",
-    "theme_color": "gray"
+    "theme_color": "#e0e5ec"
   }

@@ -43,14 +43,14 @@ function setTimerIsActive(cyclesLeft = totalActiveCycles * 2) {
 function setTimerActive() {
     activeCyclesLeft === 0 
         ? endSound() 
-        : stopSound();
+        : restSound();
 }
 
 function setTimerRest() {
     updateCyclesPerformedText();
     activeCyclesLeft === 0 
         ? endTimer()
-        : startSound()
+        : activeSound();
 }
 
 function endTimer() {

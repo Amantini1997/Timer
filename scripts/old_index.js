@@ -18,7 +18,7 @@ async function rest() {
         timerElement.innerHTML = `${copyCycleDuration*0.001}s`;
         copyCycleDuration -= 1000;
         if(copyCycleDuration < 0) {                    
-            startSound();
+            active();
             clearInterval(timerInterval);
             act(timerElement, cycleDuration, cyclesLeft);
         }
@@ -33,7 +33,7 @@ async function act(cyclesLeft) {
         copyCycleDuration -= 1000;
         if(copyCycleDuration < 0){
             increaseCounter();
-            cyclesLeft === 0 ? endSound() : stopSound();
+            cyclesLeft === 0 ? endSound() : restSound();
             clearInterval(timerInterval);
             rest(cycleDuration, --cyclesLeft);
         }

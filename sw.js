@@ -5,6 +5,9 @@ const ASSETS_TO_CACHE = [
   './',
   './index.html',
 
+  './favicon.ico',
+  './manifest.webmanifest',
+
   './styles/index.css',
 
   './scripts/index.js',
@@ -13,15 +16,12 @@ const ASSETS_TO_CACHE = [
   './scripts/pwa.js',
   './scripts/timerWorker.js',
 
-  './sounds/start.ogg',
-  './sounds/stop.ogg',
+  './sounds/active.ogg',
+  './sounds/rest.ogg',
   './sounds/end.ogg',
 
   './images/192x192.png',
   './images/512x512.png',
-
-  './favicon.ico',
-  './manifest.webmanifest',
 
   'https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js'
 ];

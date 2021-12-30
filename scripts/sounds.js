@@ -1,15 +1,22 @@
-function playAudio(audioID) {
-    document.getElementById(audioID).play()
+const AUDIOS = {
+    active: new Audio("../sounds/active.ogg"),
+    rest: new Audio("../sounds/rest.ogg"),
+    end: new Audio("../sounds/end.ogg"),
 }
 
-function startSound() {
-    playAudio("startSound");
+function playAudio(audio) {
+    console.log(audio, new Date().getSeconds())
+    AUDIOS[audio].play();
 }
 
-function stopSound() {
-    playAudio("stopSound");
+function activeSound() {
+    playAudio("active");
+}
+
+function restSound() {
+    playAudio("rest");
 }
 
 function endSound() {
-    playAudio("endSound");
+    playAudio("end");
 }
