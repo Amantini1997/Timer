@@ -13,7 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     /* prevent pull-down refresh on mobile */
-    overscroll-behavior: contain;
+    overscroll-behavior-y: contain;
 }
 
 button {
